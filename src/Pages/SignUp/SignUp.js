@@ -1,19 +1,52 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import toast from 'react-hot-toast';
+import { getAuth, signInWithPopup } from 'firebase/auth';
+import app from '../../firebase/firebase.config';
+import { GoogleAuthProvider } from 'firebase/auth/web-extension';
+
+const auth = getAuth(app);
 
 const SignUp = () => {
-    const {register, formState: { errors }, handleSubmit} = useForm();
-    const {createUser} = useContext(AuthContext)
-    const handleSignUp = (data) =>{
-      console.log(data);
-      createUser(data.email, data.password)
+    const provider = new GoogleAuthProvider();
+    const handleGoogleSignIn = () =>{
+      signInWithPopup(auth, provider)
       .then(result =>{
         const user = result.user;
         console.log(user);
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error.message);
+      });
+    }
+
+    const {register, formState: { errors }, handleSubmit} = useForm();
+
+    const {createUser, updateUser} = useContext(AuthContext);
+
+    const [signUpError, setSignUpError] = useState('');
+
+    const handleSignUp = (data) =>{
+      console.log(data);
+      setSignUpError('');
+      createUser(data.email, data.password)
+      .then(result =>{
+        const user = result.user;
+        console.log(user);
+        toast('Congratulations! You have signed up successfully.')
+        const userInfo = {
+          displayName: data.name
+        }
+        updateUser(userInfo)
+        .then(()=>{})
+        .catch(error =>console.log(error))
+      })
+      .catch(error => {
+        console.log(error)
+        setSignUpError(error.message)
+      });
     }
 
     return (
@@ -49,12 +82,13 @@ const SignUp = () => {
         <div className="form-control mt-6">
           <input type="submit" className="btn btn-primary text-white" value="SignUp"/>
         </div>
+        {signUpError && <p className='text-red-600'>{setSignUpError}</p> }
       </form>
         <div className='pb-7'>
         <p className='text-center'>Already have an account? <Link to="/login" className='text-secondary'>Login</Link></p>
         <div className="divider">OR</div>
         <div className='mx-5'>
-            <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+            <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
         </div>
         </div>
     </div>

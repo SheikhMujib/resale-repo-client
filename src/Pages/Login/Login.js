@@ -1,12 +1,32 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import { GoogleAuthProvider } from 'firebase/auth/web-extension';
 
 const Login = () => {
     const {register, formState: { errors }, handleSubmit} = useForm();
-    const {signIn} = useContext(AuthContext);
+    const {signIn, googleSignIn} = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const googleProvider = new GoogleAuthProvider();
+
+    const from = location.state?.from?.pathname || '/';
+
+    const handleGoogleSignIn = () =>{
+      googleSignIn(googleProvider)
+      .then(result =>{
+        const user = result.user;
+        console.log(user);
+        navigate(from, {replace: true});
+      })
+      .catch(error => {
+        console.log(error.message);
+        setLoginError(error.message);
+      });
+  }
     
     const handleLogin = data => {
       console.log(data);
@@ -14,7 +34,8 @@ const Login = () => {
       signIn(data.email, data.password)
       .then(result =>{
         const user = result.user;
-        console.log(user)
+        console.log(user);
+        navigate(from, {replace: true});
       })
       .catch(error => {
         console.log(error.message);
@@ -59,7 +80,7 @@ const Login = () => {
         <p className='text-center'>New to Resale Repo? <Link to="/signup" className='text-secondary'>Create an account</Link></p>
         <div className="divider">OR</div>
         <div className='mx-5'>
-            <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+            <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
         </div>
         </div>
     </div>
