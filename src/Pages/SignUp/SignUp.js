@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/AuthProvider';
 import toast from 'react-hot-toast';
 import { getAuth, signInWithPopup } from 'firebase/auth';
 import app from '../../firebase/firebase.config';
-import { GoogleAuthProvider } from 'firebase/auth/web-extension';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const auth = getAuth(app);
 
