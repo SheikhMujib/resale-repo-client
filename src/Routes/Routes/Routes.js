@@ -6,6 +6,8 @@ import SignUp from "../../Pages/SignUp/SignUp";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import Blogs from "../../Pages/Blogs/Blogs";
+import DashboardLayout from "../../Layout/DashboardLayout";
+import AboutUs from "../../Pages/AboutUs/AboutUs";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +27,10 @@ const router = createBrowserRouter([
                 element: <Blogs></Blogs>
             },
             {
+                path: '/aboutus',
+                element: <AboutUs></AboutUs>
+            },
+            {
                 path: '/signup',
                 element: <SignUp></SignUp>
             }
@@ -32,7 +38,13 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>
+        element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
+        children: [
+            {
+                path: '/dashboard',
+                element: <Dashboard></Dashboard>
+            }
+        ]
     }
 ])
 
