@@ -15,10 +15,9 @@ const AboutUs = () => {
             </div>
           </div>
           <div>
-            <h1 className="text-2xl font-bold">Mujib</h1>
+            <h1 className="text-2xl font-bold">S. M. Mujibur Rahman</h1>
             <p className="py-2">Admin and CEO Resale Repo LLC.</p>
-            <Link to="https://www.facebook.com/iamsheikhshaon/" target="_blank">
-              <button className="btn btn-primary">Visit FB Profile</button>
+            <Link to="https://www.facebook.com/iamsheikhshaon/" target="_blank" className="btn btn-primary text-white">Visit Fb Profile
             </Link>
           </div>
         </div>
@@ -34,10 +33,9 @@ const AboutUs = () => {
             </div>
           </div>
           <div>
-            <h1 className="text-2xl font-bold">Mujib</h1>
+            <h1 className="text-2xl font-bold">S. M. Mujibur Rahman</h1>
             <p className="py-2">Admin and CEO Resale Repo LLC.</p>
-            <Link to="https://www.facebook.com/iamsheikhshaon/" target="_blank">
-              <button className="btn btn-primary">Visit FB Profile</button>
+            <Link to="https://www.facebook.com/iamsheikhshaon/" target="_blank" className="btn btn-primary text-white">Visit Fb Profile
             </Link>
           </div>
         </div>
@@ -53,10 +51,9 @@ const AboutUs = () => {
             </div>
           </div>
           <div>
-            <h1 className="text-2xl font-bold">Mujib</h1>
+            <h1 className="text-2xl font-bold">S. M. Mujibur Rahman</h1>
             <p className="py-2">Admin and CEO Resale Repo LLC.</p>
-            <Link to="https://www.facebook.com/iamsheikhshaon/" target="_blank">
-              <button className="btn btn-primary">Visit FB Profile</button>
+            <Link to="https://www.facebook.com/iamsheikhshaon/" target="_blank" className="btn btn-primary text-white">Visit Fb Profile
             </Link>
           </div>
         </div>

@@ -59,7 +59,12 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{menuItems}</ul>
       </div>
       <div className="navbar-end">
-        <Link to="/" className="btn">Button</Link>
+      <label
+            htmlFor="dashboard-drawer"
+            className="btn btn-primary drawer-button lg:hidden text-white"
+          >
+            Open Sidebar
+          </label>
       </div>
     </div>
   );
